@@ -1,4 +1,4 @@
-# Info330
+# Customer Personality Analysis Dataset: Exploring Customer Behavior and Preferences
 Contains code files and sqlite DB
 
 
