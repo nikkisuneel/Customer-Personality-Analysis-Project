@@ -1,7 +1,10 @@
 # Customer Personality Analysis Dataset: Exploring Customer Behavior and Preferences
 
 ## Project Authors: 
-  [![Contributors][contributors-shield]][contributors-url]
+* Jenny Suk
+* Hrudhai Umas
+* Teerth Mehta
+* Nikhila Suneel
 
 
 
