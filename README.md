@@ -1,5 +1,8 @@
 # Customer Personality Analysis Dataset: Exploring Customer Behavior and Preferences
-Contains code files and sqlite DB
+
+## Introduction
+Understanding consumer habits and preferences is essential for businesses to properly personalize their goods and services in the age of data-driven decision-making. The Customer Personality Analysis dataset offers insightful information about customers' characteristics, spending habits, and responses to marketing efforts. This proposal will describe the dataset, discuss its intriguing aspects, and explore complex types of queries that can be supported using SQL databases from each group member. With our data analysis, we hope to help businesses identify patterns across customer segments and behavior to improve their services to better cater to customer satisfaction and market demand.
+
 
 
 Link to Proposal: [link](https://docs.google.com/document/d/1winF-tvCqeZXjQxVzwFPdpcWBUn-xyD2iQeSm_Fzs-Q/edit?usp=sharing)
