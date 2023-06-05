@@ -2,11 +2,11 @@
 # Query 1: Combines the averages of the total spending for each category of 
 # products and groups them by the levels of education of the customers:
        
- SELECT c.education, pt.name AS category, AVG(cp.amount_spent) AS average_spending
-       FROM Customer AS c
-       JOIN Customer_Product_Type AS cp ON c.id = cp.customer_id
-       JOIN Product_Type AS pt ON cp.product_id = pt.id
-       GROUP BY c.education, pt.name;
+SELECT c.education, pt.name AS category, AVG(cp.amount_spent) AS average_spending
+  FROM Customer AS c
+  JOIN Customer_Product_Type AS cp ON c.id = cp.customer_id
+  JOIN Product_Type AS pt ON cp.product_id = pt.id
+  GROUP BY c.education, pt.name;
 
 # Query 2: Calculate the average spending per product category for customers 
 # who have responded positively to marketing campaigns. 
