@@ -160,4 +160,38 @@ FROM
 GROUP BY
     kids_in_home,
     teens_in_home;
+    
+# Query 2: Calculates the average duration of customer enrollment according to education
+# level, marital status, and income level in order to better understand customer loyalty 
+# across customer segments. 
+
+WITH CustomerIncomeCategories AS (
+    SELECT
+        id,
+        CASE
+            WHEN income <= 30000 THEN 'Low Income'
+            WHEN income <= 60000 THEN 'Medium Income'
+            WHEN income <= 90000 THEN 'High Income'
+            ELSE 'Very High Income'
+        END AS income_category
+    FROM Customer
+)
+
+SELECT
+    c.education,
+    c.marital_status,
+    ci.income_category,
+    ROUND(AVG(CAST(CURRENT_DATE - c.enrollment_date AS INTEGER)), 2) AS avg_enrollment_duration
+FROM
+    Customer AS c
+LEFT JOIN
+    CustomerIncomeCategories AS ci ON c.id = ci.id
+GROUP BY
+    c.education,
+    c.marital_status,
+    ci.income_category
+ORDER BY
+    c.education,
+    c.marital_status,
+    ci.income_category;
 
