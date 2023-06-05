@@ -203,6 +203,8 @@ ORDER BY
 # Then, it uses a conditional statement to count the distinct customer IDs for customers who have a "Recency" value greater than 30, 
 # indicating churned customers. Finally, it calculates the churn rate by dividing the count of churned customers by the total number 
 # of customers and multiplying by 100. The results are grouped by enrollment year and ordered in ascending order.
+# Churn rate refers to the rate at which customers stop doing business or discontinue their relationship with a 
+# company over a specific period of time, in this case over 30 days. 
 
 SELECT CAST(substr(enrollment_date, 7, 4) AS INTEGER) AS EnrollmentYear,
        COUNT(DISTINCT(id)) AS TotalCustomers,
@@ -211,3 +213,64 @@ SELECT CAST(substr(enrollment_date, 7, 4) AS INTEGER) AS EnrollmentYear,
 FROM Customer
 GROUP BY EnrollmentYear
 ORDER BY EnrollmentYear;
+
+
+# Query 2: This query calculates various metrics related to customer lifetime value (CLV) and enrollment year.
+# It first extracts the enrollment year from the "enrollment_date" column for each customer and groups the data by enrollment year.
+# It joins multiple tables to gather information about customer purchases, 
+# including the total number of purchases and the total amount spent by each customer.
+# Using this data, it calculates the average purchase value and CLV for each customer.
+# It determines whether a customer has a CLV greater than the average CLV for their enrollment year, 
+# and assigns a value of 1 if true, and 0 otherwise. Finally, it aggregates the results by enrollment year, 
+# counting the total number of customers, the number of customers with a CLV greater than the average, 
+# and calculates the percentage of customers with a CLV greater than the average.
+
+SELECT C.EnrollmentYear,
+       COUNT(C.id) AS TotalCustomers,
+       SUM(C.GreaterThanAverageCLV) AS CustomersWithGreaterThanAverageCLV,
+       (SUM(C.GreaterThanAverageCLV) * 100) / COUNT(C.id) AS PercentageCustomersWithGreaterThanAverageCLV
+FROM (
+    SELECT DISTINCT C.id,
+           C.EnrollmentYear,
+           TotalPurchases.TotalNumOfPurchases,
+           TotalAmount.TotalAmountSpent,
+           TotalAmount.TotalAmountSpent / TotalPurchases.TotalNumOfPurchases AS AveragePurchaseValue,
+           TotalAmount.TotalAmountSpent * (TotalAmount.TotalAmountSpent / TotalPurchases.TotalNumOfPurchases) AS CLV,
+           CASE WHEN (TotalAmount.TotalAmountSpent * (TotalAmount.TotalAmountSpent / TotalPurchases.TotalNumOfPurchases)) > AvgCLV.AvgCLV THEN 1 ELSE 0 END AS GreaterThanAverageCLV
+    FROM (
+        SELECT C.id,
+               CAST(substr(C.enrollment_date, 7, 4) AS INTEGER) AS EnrollmentYear
+        FROM Customer AS C
+    ) AS C
+    JOIN Customer_Product_Type AS CPT ON C.id = CPT.customer_id
+    JOIN Customer_Purchase_Source AS CPS ON C.id = CPS.customer_id
+    JOIN (
+        SELECT customer_id, SUM(num_of_purchases) AS TotalNumOfPurchases
+        FROM Customer_Purchase_Source
+        GROUP BY customer_id
+    ) AS TotalPurchases ON C.id = TotalPurchases.customer_id
+    JOIN (
+        SELECT customer_id, SUM(amount_spent) AS TotalAmountSpent
+        FROM Customer_Product_Type
+        GROUP BY customer_id
+    ) AS TotalAmount ON C.id = TotalAmount.customer_id
+    JOIN (
+        SELECT CAST(substr(C1.enrollment_date, 7, 4) AS INTEGER) AS EnrollmentYear,
+               AVG(TotalAmount1.TotalAmountSpent * (TotalAmount1.TotalAmountSpent / TotalPurchases1.TotalNumOfPurchases)) AS AvgCLV
+        FROM Customer AS C1
+        JOIN Customer_Product_Type AS CPT1 ON C1.id = CPT1.customer_id
+        JOIN Customer_Purchase_Source AS CPS1 ON C1.id = CPS1.customer_id
+        JOIN (
+            SELECT customer_id, SUM(num_of_purchases) AS TotalNumOfPurchases
+            FROM Customer_Purchase_Source
+            GROUP BY customer_id
+        ) AS TotalPurchases1 ON C1.id = TotalPurchases1.customer_id
+        JOIN (
+            SELECT customer_id, SUM(amount_spent) AS TotalAmountSpent
+            FROM Customer_Product_Type
+            GROUP BY customer_id
+        ) AS TotalAmount1 ON C1.id = TotalAmount1.customer_id
+        GROUP BY EnrollmentYear
+    ) AS AvgCLV ON C.EnrollmentYear = AvgCLV.EnrollmentYear
+) AS C
+GROUP BY C.EnrollmentYear;
