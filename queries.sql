@@ -9,3 +9,12 @@ GROUP BY c.education, pt.name;
 
 # Query 2: Analyzing the if and what the relationship is between customers and 
 # their varying income levels with how they respond to varying marketing campaigns.
+SELECT income, 
+       AVG(CASE WHEN promotion_id = 1 THEN response ELSE 0 END) AS avg_acceptance_cmp1,
+       AVG(CASE WHEN promotion_id = 2 THEN response ELSE 0 END) AS avg_acceptance_cmp2,
+       AVG(CASE WHEN promotion_id = 3 THEN response ELSE 0 END) AS avg_acceptance_cmp3,
+       AVG(CASE WHEN promotion_id = 4 THEN response ELSE 0 END) AS avg_acceptance_cmp4,
+       AVG(CASE WHEN promotion_id = 5 THEN response ELSE 0 END) AS avg_acceptance_cmp5
+FROM Customer
+JOIN Customer_Promotion ON Customer.id = Customer_Promotion.customer_id
+GROUP BY income;
