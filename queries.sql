@@ -1,36 +1,71 @@
 # Nikki's Queries
-       # Query 1: Combines the averages of the total spending for each category of 
-       # products and groups them by the levels of education of the customers:
+# Query 1: Combines the averages of the total spending for each category of 
+# products and groups them by the levels of education of the customers:
        
-              SELECT c.education, pt.name AS category, AVG(cp.amount_spent) AS average_spending
-              FROM Customer AS c
-              JOIN Customer_Product_Type AS cp ON c.id = cp.customer_id
-              JOIN Product_Type AS pt ON cp.product_id = pt.id
-              GROUP BY c.education, pt.name;
+ SELECT c.education, pt.name AS category, AVG(cp.amount_spent) AS average_spending
+       FROM Customer AS c
+       JOIN Customer_Product_Type AS cp ON c.id = cp.customer_id
+       JOIN Product_Type AS pt ON cp.product_id = pt.id
+       GROUP BY c.education, pt.name;
 
-       # Query 2: Calculate the average spending per product category for customers 
-       # who have responded positively to marketing campaigns. 
+# Query 2: Calculate the average spending per product category for customers 
+# who have responded positively to marketing campaigns. 
        
-              SELECT
-                     pt.name AS product_category,
-                     AVG(cpt.amount_spent) AS average_spending
-              FROM
-                     Customer AS c
-              JOIN
-                     Customer_Promotion AS cp ON c.id = cp.customer_id
-              JOIN
-                     Promotion AS pm ON cp.promotion_id = pm.id
-              JOIN
-                     Customer_Product_Type AS cpt ON c.id = cpt.customer_id
-              JOIN
-                     Product_Type AS pt ON cpt.product_id = pt.id
-              WHERE
-                     pm.name LIKE 'AcceptedCmp%'
-                     AND c.has_complained = 0
-              GROUP BY
-                     pt.name
-              ORDER BY
-                     average_spending DESC;
+SELECT
+  pt.name AS product_category,
+  AVG(cpt.amount_spent) AS average_spending,
+  pm.name AS most_popular_campaign
+FROM
+  Customer AS c
+JOIN
+  Customer_Promotion AS cp ON c.id = cp.customer_id
+JOIN
+  Promotion AS pm ON cp.promotion_id = pm.id
+JOIN
+  Customer_Product_Type AS cpt ON c.id = cpt.customer_id
+JOIN
+  Product_Type AS pt ON cpt.product_id = pt.id
+JOIN
+  (
+    SELECT
+      cpt.product_id,
+      cp.promotion_id,
+      COUNT(*) AS campaign_count
+    FROM
+      Customer_Product_Type AS cpt
+    JOIN
+      Customer_Promotion AS cp ON cpt.customer_id = cp.customer_id
+    GROUP BY
+      cpt.product_id,
+      cp.promotion_id
+    ORDER BY
+      cpt.product_id,
+      campaign_count DESC
+  ) AS pc ON pt.id = pc.product_id AND pm.id = pc.promotion_id
+WHERE
+  pm.name LIKE 'AcceptedCmp%'
+  AND c.has_complained = 0
+  AND pc.campaign_count = (
+    SELECT MAX(campaign_count)
+    FROM (
+      SELECT
+        cpt.product_id,
+        cp.promotion_id,
+        COUNT(*) AS campaign_count
+      FROM
+        Customer_Product_Type AS cpt
+      JOIN
+        Customer_Promotion AS cp ON cpt.customer_id = cp.customer_id
+      GROUP BY
+        cpt.product_id,
+        cp.promotion_id
+    ) AS subquery
+    WHERE subquery.product_id = pc.product_id
+  )
+GROUP BY
+  pt.name
+ORDER BY
+  average_spending DESC;
 
 
 
