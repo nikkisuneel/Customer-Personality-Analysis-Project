@@ -137,4 +137,27 @@ ORDER BY
                   ((CAST(ts.necessary_spent AS float) / (CAST(ts.necessary_spent AS float) + CAST(ts.disposable_spent AS float))) * 100) AS necessary_percentage,
                      ((CAST(ts.disposable_spent AS float) / (CAST(ts.necessary_spent AS float) + CAST(ts.disposable_spent AS float))) * 100) AS disposable_percentage
               FROM TotalIncome AS ti
-              JOIN TotalSpent AS ts ON ts.customer_id = ti.id;        
+              JOIN TotalSpent AS ts ON ts.customer_id = ti.id; 
+              
+# Jenny's Queries
+# Query 1: Calculates the average amounts spent across product categories
+# (wine, fruit, meat, fish, sweets, and gold) by customers based on the number of children (kids_in_home) and 
+# teenagers (teens_in_home) in a customer’s household.
+
+SELECT
+    kids_in_home,
+    teens_in_home,
+    AVG(CASE WHEN pt.name = 'Wines' THEN cp.amount_spent END) AS avg_wine_spending,
+    AVG(CASE WHEN pt.name = 'Fruits' THEN cp.amount_spent END) AS avg_fruit_spending,
+    AVG(CASE WHEN pt.name = 'Meat' THEN cp.amount_spent END) AS avg_meat_spending,
+    AVG(CASE WHEN pt.name = 'Fish' THEN cp.amount_spent END) AS avg_fish_spending,
+    AVG(CASE WHEN pt.name = 'Sweet' THEN cp.amount_spent END) AS avg_sweet_spending,
+    AVG(CASE WHEN pt.name = 'Gold' THEN cp.amount_spent END) AS avg_gold_spending
+FROM
+    Customer AS c
+    JOIN Customer_Product_Type AS cp ON c.id = cp.customer_id
+    JOIN Product_Type AS pt ON cp.product_id = pt.id
+GROUP BY
+    kids_in_home,
+    teens_in_home;
+
