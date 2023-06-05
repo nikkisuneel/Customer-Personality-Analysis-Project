@@ -8,8 +8,9 @@ SELECT c.education, pt.name AS category, AVG(cp.amount_spent) AS average_spendin
   JOIN Product_Type AS pt ON cp.product_id = pt.id
   GROUP BY c.education, pt.name;
 
-# Query 2: Calculate the average spending per product category for customers 
-# who have responded positively to marketing campaigns. 
+# Query 2: Finding the most popular marketing campaign for each product category, 
+# and calculate the average spending per product category for customers who have 
+# responded positively to marketing campaigns. 
        
 SELECT
   pt.name AS product_category,
