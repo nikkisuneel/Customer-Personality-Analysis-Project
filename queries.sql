@@ -195,3 +195,19 @@ ORDER BY
     c.marital_status,
     ci.income_category;
 
+# Teerth's Queries:
+#
+# Query 1: The SQL query retrieves data from the "Customer" table and performs several calculations. 
+# First, it extracts the enrollment year from the "enrollment_date" column for each customer and casts it as an integer.
+# Next, it counts the distinct customer IDs to determine the total number of customers for each enrollment year.
+# Then, it uses a conditional statement to count the distinct customer IDs for customers who have a "Recency" value greater than 30, 
+# indicating churned customers. Finally, it calculates the churn rate by dividing the count of churned customers by the total number 
+# of customers and multiplying by 100. The results are grouped by enrollment year and ordered in ascending order.
+
+SELECT CAST(substr(enrollment_date, 7, 4) AS INTEGER) AS EnrollmentYear,
+       COUNT(DISTINCT(id)) AS TotalCustomers,
+       COUNT(DISTINCT CASE WHEN Recency > 30 THEN id END) AS ChurnedCustomers,
+       (COUNT(DISTINCT CASE WHEN Recency > 30 THEN id END) * 100 / COUNT(DISTINCT id)) AS ChurnRate
+FROM Customer
+GROUP BY EnrollmentYear
+ORDER BY EnrollmentYear;
