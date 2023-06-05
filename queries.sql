@@ -8,8 +8,8 @@
               JOIN Product_Type AS pt ON cp.product_id = pt.id
               GROUP BY c.education, pt.name;
 
-       # Query 2: Analyzing the if and what the relationship is between customers and 
-       # their varying income levels with how they respond to varying marketing campaigns.
+       # Query 2: Calculate the average spending per product category for customers 
+       # who have responded positively to marketing campaigns. 
        
               SELECT
                      pt.name AS product_category,
