@@ -18,24 +18,24 @@ Understanding consumer habits and preferences is essential for businesses to pro
 ## Key Links 
 * Link to Proposal: [link](https://docs.google.com/document/d/1winF-tvCqeZXjQxVzwFPdpcWBUn-xyD2iQeSm_Fzs-Q/edit?usp=sharing)
 
-* Link to ERD Diagram: [link](https://github.com/nikkisuneel/Info330/blob/main/ERD_Diagram_FINAL.png)
+* Link to ERD Diagram: [link](/ERD_Diagram_FINAL.png)
 
 * Link to Presentation: [link](https://docs.google.com/presentation/d/17LH9PYc8gqjZ3jHsMAuq4vnfT1aj1RNuF0mAdgRWXrA/edit?usp=sharing)
 
 ## Link to Queries 
 
-* Link to Queries: [link](https://github.com/nikkisuneel/Info330/blob/main/queries.sql)
+* Link to Queries: [link](/queries.sql)
 
 
 ## Data Visualizations
 
 * Link to Hrudhai's Visualization: [link](/Hrudhai's_Data_Viz.png)
 
-* Link to Teerth's Visualization: [link](https://github.com/nikkisuneel/Info330/blob/main/TeerthMehtaPowerBI.pdf)
+* Link to Teerth's Visualization: [link](/TeerthMehtaPowerBI.pdf)
 
-* Link to Jenny's Visualization: [link](https://github.com/nikkisuneel/Info330/blob/main/Jenny's-DataViz-Wine.png)
+* Link to Jenny's Visualization: [link](/Jenny's-DataViz-Wine.png)
 
-* Link to Nikki's Visualization: [link](https://github.com/nikkisuneel/Info330/blob/main/Nikki_Suneel_Data_Viz.png)
+* Link to Nikki's Visualization: [link](/Nikki_Suneel_Data_Viz.png)
 
 
 
