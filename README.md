@@ -23,7 +23,7 @@ Understanding consumer habits and preferences is essential for businesses to pro
 * Link to Queries: [link](https://github.com/nikkisuneel/Info330/blob/main/queries.sql)
 
 
-## Data Visualization's
+## Data Visualizations
 
 * Link to Hrudhai's Visualization: [link](https://github.com/nikkisuneel/Info330/blob/main/Hrudhai's_Data_Viz.png)
 
