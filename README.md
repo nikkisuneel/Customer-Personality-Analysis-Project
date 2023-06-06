@@ -18,7 +18,7 @@ Understanding consumer habits and preferences is essential for businesses to pro
 ## Key Links 
 * Link to Proposal: [link](https://docs.google.com/document/d/1winF-tvCqeZXjQxVzwFPdpcWBUn-xyD2iQeSm_Fzs-Q/edit?usp=sharing)
 
-* Link to ERD Diagram: [link](https://lucid.app/lucidchart/814a7936-c530-4e09-88ed-d622657704a2/edit?viewport_loc=-636%2C-138%2C3828%2C1869%2C84k24rG8Tdxi&invitationId=inv_cf45928d-94ee-4510-9d92-3d8e145189d5)
+* Link to ERD Diagram: [link](https://lucid.app/lucidchart/814a7936-c530-4e09-88ed-d622657704a2/edit?viewport_loc=-636%2C-138%2C3828%2C1869%2C84k24rG8Tdxi&invitationId=inv_cf45928d-94ee-4510-9d92-3d8e145189d5](https://github.com/nikkisuneel/Info330/blob/main/ERD_Diagram_FINAL.png)
 
 * Link to Presentation: [link](https://docs.google.com/presentation/d/17LH9PYc8gqjZ3jHsMAuq4vnfT1aj1RNuF0mAdgRWXrA/edit?usp=sharing)
 
