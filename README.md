@@ -1,5 +1,9 @@
 # Customer Personality Analysis Dataset: Exploring Customer Behavior and Preferences
 
+## Final Video Presentation 
+
+* Link to Presentation: [link](https://drive.google.com/file/d/16JOP8D8aIf_O61Y5IfntoXW5BS1LH41-/view?usp=sharing)
+
 ## Project Authors: 
 * Jenny Suk
 * Hrudhai Umas
