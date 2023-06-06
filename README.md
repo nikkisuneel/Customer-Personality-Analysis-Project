@@ -35,7 +35,7 @@ Understanding consumer habits and preferences is essential for businesses to pro
 
 * Link to Jenny's Visualization: [link](https://github.com/nikkisuneel/Info330/blob/main/Jenny's-DataViz-Wine.png)
 
-* Link to Nikki's Visualization: [link] ()
+* Link to Nikki's Visualization: [link](https://github.com/nikkisuneel/Info330/blob/main/Nikki_Suneel_Data_Viz.png)
 
 
 
